@@ -31,7 +31,7 @@ json_parsed["drinks"].each do |cocktail|
     ingredient = Ingredient.where(name: ingredient).take
     dose_desc = measures_array[i]
     i += 1
-    if ing
+    if ingredient
       Dose.create(description: dose_desc, cocktail_id: cocktail_created.id, ingredient_id: ingredient.id)
     end
   end
