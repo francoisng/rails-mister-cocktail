@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+
 require "open-uri"
 require "json"
 
@@ -21,7 +23,10 @@ read = open(url).read
 json_parsed = JSON.parse(read)
 json_parsed["drinks"].each do |cocktail|
   cocktail_name = cocktail["strDrink"]
+  photo_url = cocktail["strDrinkThumb"]
+  file = URI.open(photo_url)
   cocktail_created = Cocktail.create(name: cocktail_name)
+  cocktail_created.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')
   ingredients_hash = cocktail.select { |k, _| k.include? "strIngredient" }
   ingredients_array = ingredients_hash.values.reject { |e| e.to_s.empty? }
   measures_hash = cocktail.select { |k, _| k.include? "strMeasure" }
