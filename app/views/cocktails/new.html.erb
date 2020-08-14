@@ -1,8 +1,7 @@
-<%= simple_form_for [cocktail] do |c| %>
+<%= simple_form_for [@cocktail] do |c| %>
   <%= c.label :name %>
   <%= c.text_field :name %>
-  <%= c.label :photo %>
-  <%= f.input :photo, as: :file %> 
+  <%= c.input :photo, as: :file %>
   <%= c.submit %>
 <% end %>
 
